@@ -1,7 +1,6 @@
 # TIL
 Today I Learned
 
----
 ## Python
 ### Numpy
 - https://github.com/REKO-J/TIL/tree/main/Python/Numpy
