@@ -2,11 +2,8 @@
 Today I Learned
 
 ## Python
-### Numpy
-- https://github.com/REKO-J/TIL/tree/main/Python/Numpy
+- [Numpy](https://github.com/REKO-J/TIL/tree/main/Python/Numpy)
 
-### TensorFlow
-- https://github.com/REKO-J/TIL/tree/main/Python/PyTorch
+- [TensorFlow](https://github.com/REKO-J/TIL/tree/main/Python/PyTorch)
 
-### PyTorch
-- https://github.com/REKO-J/TIL/tree/main/Python/TensorFlow
+- [PyTorch](https://github.com/REKO-J/TIL/tree/main/Python/TensorFlow)
