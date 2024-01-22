@@ -11,4 +11,4 @@ Today I Learned
 - [PyTorch](https://github.com/REKO-J/TIL/tree/main/Python/TensorFlow)
 
 ## C
-- [기초] 
+- [기초](https://github.com/REKO-J/TIL/tree/main/C/%EA%B8%B0%EC%B4%88)
