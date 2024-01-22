@@ -9,3 +9,6 @@ Today I Learned
 - [TensorFlow](https://github.com/REKO-J/TIL/tree/main/Python/PyTorch)
 
 - [PyTorch](https://github.com/REKO-J/TIL/tree/main/Python/TensorFlow)
+
+## C
+- [기초] 
