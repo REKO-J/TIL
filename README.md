@@ -14,4 +14,4 @@ Today I Learned
 - [기초](https://github.com/REKO-J/TIL/tree/main/C/%EA%B8%B0%EC%B4%88)
 
 ## Django
-- [project] Instargram 클론 코딩
+- [project](https://github.com/REKO-J/TIL/tree/main/Django/Instargram%20Clone%20Coding/Hunstargram)
