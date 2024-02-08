@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-#!0o9us5f!&tw81+i=2=)uw08%+lv*-+5^sw@eggs-sb8%(9-('
+SECRET_KEY = 'django-insecure-=cioyu4n-b1z6a1$96av-c#p0g(d9a2#svs0*is6xkq=iibp_('
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,9 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'Hunstargram',
-    'content',
-    'user'
+    'feed'
 ]
 
 MIDDLEWARE = [
@@ -128,14 +125,3 @@ STATIC_URL = '/static/'
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-
-# mysite/settings.py
-
-# 각 media 파일에 대한 URL Prefix
-MEDIA_URL = '/media/' # 항상 / 로 끝나도록 설정
-# MEDIA_URL = 'http://static.myservice.com/media/' 다른 서버로 media 파일 복사시
-# 업로드된 파일을 저장할 디렉토리 경로
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# 커스텀 유저 모델 사용
-AUTH_USER_MODEL = 'user.User'

@@ -1,11 +1,10 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 
-class Sub(APIView):
-    def get(self, request):
-        print("겟으로 호출")
-        return render(request, "hunstargram/main.html")
+from feed.models import Feed
 
-    def post(self, request):
-        print("포스트로 호출")
-        return render(request, "hunstargram/main.html")
+
+class Main(APIView):
+    def get(self, request):
+        feed_list = Feed.objects.all()
+        return render(request, 'Hunstargram/main.html', context=dict(feed_list=feed_list))
