@@ -184,7 +184,11 @@
                     </div>
                 </div>
                 <div style="margin-left: 15px">
-                    <textarea style="width: 260px; height: 480px; border: none;" placeholder="문구를 입력하세요..."></textarea>
+                    <textarea id="input_feed_content" style="width: 260px; height: 430px; border: none;"
+                              placeholder="문구를 입력하세요..."></textarea>
+                    <button id="feed_create_button" style="width: 250px; margin: 5px;" type="button"
+                            class="btn btn-primary">공유하기
+                    </button>
                 </div>
             </div>
         </div>
@@ -461,6 +465,8 @@
         integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
         crossorigin="anonymous"></script>
 <script>
+    let files;
+
     // 모달 띄우기 코드
     const modal = document.getElementById("modal_overlay");
     const modal_image_upload = document.getElementById("modal_image_upload");
@@ -497,10 +503,10 @@
         e.preventDefault();
 
         e.dataTransfer = e.originalEvent.dataTransfer;
-        var files = e.dataTransfer.files;
+        files = e.dataTransfer.files;
 
         if (files.length > 1) {
-            alert('한장만 올려주세요.');
+            alert('한장만 올려주세요');
             return;
         }
 
@@ -519,10 +525,45 @@
                 "background-size": "100% 100%"
             })
         } else {
-            alert('이미지가 아닙니다.');
+            alert('이미지가 아닙니다');
             return;
         }
     }
+
+    $('#feed_create_button').click(function () {
+        alert("공유하기 눌렀다");
+
+        let file = files
+        let profile_image = "https://i.pinimg.com/236x/2f/55/97/2f559707c3b04a1964b37856f00ad608.jpg";
+        let user_name = "yeonghun_e";
+        let content_image = files[0].name;
+        let content = $('#input_feed_content').val();
+
+        let fd = new FormData();
+
+        fd.append('file', file);
+        fd.append('profile_image', profile_image);
+        fd.append('user_name', user_name);
+        fd.append('content_image', content_image);
+        fd.append('content', content);
+
+        $.ajax({
+            url: "/content/upload",
+            data: fd,
+            method: "POST",
+            processData: false,
+            cotentType: false,
+            success: function (data) {
+                console.log("성공");
+            },
+            error: function (request, status, error) {
+                console.log("에러");
+            },
+            complete: function () {
+                console.log("완료");
+            }
+        })
+    });
 
 </script>
 </body>

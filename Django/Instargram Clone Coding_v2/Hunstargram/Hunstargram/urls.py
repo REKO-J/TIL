@@ -15,9 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+
+from content.views import UploadFeed
 from .views import Main
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', Main.as_view())
+    path('', Main.as_view()),
+    path('content/upload', UploadFeed.as_view())
 ]

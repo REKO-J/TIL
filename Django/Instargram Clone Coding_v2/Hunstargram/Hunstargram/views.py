@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 
-from feed.models import Feed
+from content.models import Feed
 
 
 class Main(APIView):
