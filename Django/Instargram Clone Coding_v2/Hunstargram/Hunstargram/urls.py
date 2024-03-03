@@ -8,8 +8,8 @@ from content.views import Main
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', Main.as_view()),
-    # path('content/upload', UploadFeed.as_view())
-    path('', include('content.urls'))
+    path('', include('content.urls')),
+    path('', include('user.urls'))
 ]
 
 urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)

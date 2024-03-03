@@ -38,11 +38,6 @@ class UploadFeed(APIView):
         return Response(status=200)
 
 
-class Login(APIView):
-    def get(self, request):
-        return render(request, 'Hunstargram/login.html')
-
-
 class Profile(APIView):
     def get(self, request):
         return render(request, 'Hunstargram/profile.html')
