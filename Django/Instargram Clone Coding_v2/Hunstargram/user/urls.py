@@ -1,6 +1,6 @@
-from django.urls import path
+from django.urls import path, include
 
-from user.views import Join, Login
+from .views import Join, Login
 
 urlpatterns = [
     path('join', Join.as_view()),

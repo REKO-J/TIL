@@ -7,13 +7,25 @@ from rest_framework.views import APIView
 
 from Hunstargram.settings import MEDIA_ROOT
 from content.models import Feed
+from user.models import User
 
 
 # Create your views here.
 class Main(APIView):
     def get(self, request):
         feed_list = Feed.objects.all()
-        return render(request, 'Hunstargram/main.html', context=dict(feeds=feed_list))
+
+        print('로그인한 사용자 :', request.session['email'])
+
+        email = request.session['email']
+        if email is None:
+            return render(request, 'user/login.html')
+
+        user = User.objects.filter(email=email).first()
+        if user is None:
+            return render(request, 'user/login.html')
+
+        return render(request, 'Hunstargram/main.html', context=dict(feeds=feed_list, user=user))
 
 
 class UploadFeed(APIView):
