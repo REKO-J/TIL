@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 
 from Hunstargram.settings import MEDIA_ROOT
+from content.models import Feed, Bookmark
 from user.models import User
 
 
@@ -16,17 +17,16 @@ class Join(APIView):
         return render(request, "user/join.html")
 
     def post(self, request):
-        # todo 회원가입
         email = request.data.get('email', None)
-        nickname = request.data.get('nickname', None)
         name = request.data.get('name', None)
+        nickname = request.data.get('nickname', None)
         password = request.data.get('password', None)
 
         User.objects.create(email=email,
-                            nickname=nickname,
                             name=name,
+                            nickname=nickname,
                             password=make_password(password),
-                            profile_image="default_profile.jpg")
+                            profile_image="bb40f86f3b3d44dd84afd1a45cfb108e")
 
         return Response(status=200)
 
@@ -36,21 +36,19 @@ class Login(APIView):
         return render(request, "user/login.html")
 
     def post(self, request):
-        # todo 로그인
         email = request.data.get('email', None)
         password = request.data.get('password', None)
 
         user = User.objects.filter(email=email).first()
 
         if user is None:
-            return Response(status=404, data=dict(message="회원정보가 잘못되었습니다."))
+            return Response(status=400, data=dict(message="회원정보가 잘못되었습니다"))
 
         if user.check_password(password):
-            # todo 로그인을 했다. 세션 or 쿠키
             request.session['email'] = email
             return Response(status=200)
         else:
-            return Response(status=400, data=dict(message="회원정보가 잘못되었습니다."))
+            return Response(status=400, data=dict(message="회원정보가 잘못되었습니다"))
 
 
 class Logout(APIView):
@@ -59,15 +57,36 @@ class Logout(APIView):
         return render(request, "user/login.html")
 
 
+class Profile(APIView):
+    def get(self, request):
+        email = request.session.get("email", None)
+        if email is None:
+            return render(request, "user/login.html")
+
+        user = User.objects.filter(email=email).first()
+        if user is None:
+            return render(request, "user/login.html")
+
+        feed_list = Feed.objects.filter(email=email)
+        bookmark_list = list(Bookmark.objects.filter(email=email, is_marked=True).values_list('feed_id', flat=True))
+        bookmark_feed_list = Feed.objects.filter(id__in=bookmark_list)
+
+        feed_count = Feed.objects.filter(email=email).count()
+        return render(request, "user/profile.html", context=dict(feed_list=reversed(feed_list),
+                                                                 bookmark_feed_list=reversed(bookmark_feed_list),
+                                                                 feed_count=feed_count,
+                                                                 user=user))
+
+
 class UploadProfile(APIView):
     def post(self, request):
         # 일단 파일 불러와
         file = request.FILES['file']
 
-        uuid_name = uuid4().hex
+        uuid_name = uuid4().hex  # 랜덤한 글자 생성(이미지 파일 이름 생성)
         save_path = os.path.join(MEDIA_ROOT, uuid_name)
 
-        with open(save_path, 'wb+') as destination:
+        with open(save_path, 'wb') as destination:
             for chunk in file.chunks():
                 destination.write(chunk)
 
