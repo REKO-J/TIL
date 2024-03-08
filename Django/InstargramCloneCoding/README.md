@@ -22,4 +22,4 @@
 - python manage.py migrate
 4. 개발 서버를 실행합니다. <br>
 - python manage.py runserver
-5. 웹 브라우저에서 http://localhost:8000/main으로 접속합니다.
+5. 웹 브라우저에서 http://localhost:8000/main 으로 접속합니다.
