@@ -22,7 +22,7 @@
 ## 설치 및 실행
 1. 프로젝트를 클론합니다. <br>
 - git clone https://github.com/REKO-J/TIL/tree/main/Django/InstargramCloneCoding
-2. 가상환경을 설정하고 의존성을 설치합니다. <br>
+2. 가상환경을 설정합니다.
 - cd instagram-clone
 - python -m venv venv
 - source venv/bin/activate  # Windows의 경우: venv\Scripts\activate
