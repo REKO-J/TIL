@@ -1,4 +1,4 @@
-# Instargram Clone Coding
+# Instagram Clone Coding
 
 ## 프로젝트 소개
 인스타그램을 클론코딩한 Django 웹 애플리케이션입니다. 사용자는 사진 업로드, 좋아요, 댓글 작성 등의 기능을 활용할 수 있습니다.
