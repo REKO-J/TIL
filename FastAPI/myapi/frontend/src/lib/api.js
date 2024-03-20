@@ -1,50 +1,60 @@
-const fastapi = (operation, url, params, success_callback, failure_callback) => {
-    let method = operation
-    let content_type = 'application/json'
-    let body = JSON.stringify(params)
+import qs from "qs";
 
-    let _url = import.meta.env.VITE_SERVER_URL + url
-    if (method === 'get') {
-        _url += "?" + new URLSearchParams(params)
+const fastapi = (operation, url, params, success_callback, failure_callback) => {
+    let method = operation;
+    let content_type = "application/json";
+    let body = JSON.stringify(params);
+
+    if (operation === "login") {
+        method = "post";
+        content_type = "application/x-www-form-urlencoded";
+        body = qs.stringify(params);
+    }
+
+    let _url = import.meta.env.VITE_SERVER_URL + url;
+    if (method === "get") {
+        _url += "?" + new URLSearchParams(params);
     }
 
     let options = {
         method: method,
         headers: {
-            "Content-Type": content_type
-        }
+            "Content-Type": content_type,
+        },
+    };
+
+    if (method !== "get") {
+        options["body"] = body;
     }
 
-    if (method !== 'get') {
-        options['body'] = body
-    }
-
-    fetch(_url, options)
-        .then(response => {
-            if (response.status === 204) {  // No content
-                if (success_callback) {
-                    success_callback
-                }
-                return
+    fetch(_url, options).then((response) => {
+        if (response.status === 204) {
+            // No content
+            if (success_callback) {
+                success_callback;
             }
-            response.json()
-                .then(json => {
-                    if (response.status >= 200 && response.status < 300) {  // 200 ~ 299
-                        if (success_callback) {
-                            success_callback(json)
-                        }
-                    } else {
-                        if (failure_callback) {
-                            failure_callback(json)
-                        } else {
-                            alert(JSON.stringify(json))
-                        }
+            return;
+        }
+        response
+            .json()
+            .then((json) => {
+                if (response.status >= 200 && response.status < 300) {
+                    // 200 ~ 299
+                    if (success_callback) {
+                        success_callback(json);
                     }
-                })
-                .catch(error => {
-                    alert(JSON.stringify(error))
-                })
-        })
-}
+                } else {
+                    if (failure_callback) {
+                        failure_callback(json);
+                    } else {
+                        alert(JSON.stringify(json));
+                    }
+                }
+            })
+            .catch((error) => {
+                alert(JSON.stringify(error));
+            });
+    });
+};
 
-export default fastapi
+export default fastapi;
