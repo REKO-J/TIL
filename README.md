@@ -16,5 +16,8 @@ Today I Learned
 ## Django
 - [Instargram CloneCoding](https://github.com/REKO-J/TIL/tree/main/Django/InstargramCloneCoding)
 
+## FastAPI
+- [게시판 만들기](https://github.com/REKO-J/TIL/tree/main/FastAPI/myapi)
+
 ## SQL
 - https://rekoj.tistory.com/category/SQL
