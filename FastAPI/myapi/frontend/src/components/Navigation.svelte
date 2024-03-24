@@ -1,6 +1,6 @@
 <script>
     import { link } from "svelte-spa-router";
-    import { page, access_token, username, is_login } from "../lib/store";
+    import { page, keyword, access_token, username, is_login } from "../lib/store";
 </script>
 
 <!-- 네비게이션바 -->
@@ -11,7 +11,7 @@
             class="navbar-brand"
             href="/"
             on:click={() => {
-                $page = 0;
+                ($keyword = ""), ($page = 0);
             }}>Pybo</a
         >
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
