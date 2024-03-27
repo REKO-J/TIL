@@ -2,6 +2,8 @@ from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
 import requests
 
+from domain.user import user_router
+
 app = FastAPI()
 
 origins = [
@@ -16,6 +18,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+app.include_router(user_router.router)
 
 @app.get("/fetch_data")
 async def fetch_data(title: str = ''):
